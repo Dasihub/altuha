@@ -1,0 +1,13 @@
+.img_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 4px;
+    justify-self: center;
+}
+
+.img {
+    width: 309px;
+    height: 309px;
+    cursor: pointer;
+    object-fit: cover;
+}
