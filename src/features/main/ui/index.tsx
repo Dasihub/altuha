@@ -9,6 +9,7 @@ export const Main: FC = () => {
     const columns = getColumn()
     const { token } = useContext(AuthContext)
     const [users, setUsers] = useState<string[]>([])
+    const [items, setItems] = useState<string[]>([])
     const [name, setName] = useState<string>('')
     const [values, setValues] = useState<string[]>([])
     const inputRef = useRef<InputRef>(null)
@@ -21,7 +22,7 @@ export const Main: FC = () => {
 
     const addItem = (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
         e.preventDefault()
-        setUsers([...users, name])
+        setItems([...items, name])
         setName('')
         setTimeout(() => {
             inputRef.current?.focus()
@@ -42,7 +43,7 @@ export const Main: FC = () => {
                 <Select
                     size='large'
                     style={{ minWidth: '400px' }}
-                    onChange={value => setValues(value)}
+                    onChange={setUsers}
                     notFoundContent='Пока нет данных'
                     mode='tags'
                     dropdownRender={menu => (
@@ -64,7 +65,7 @@ export const Main: FC = () => {
                             </Form>
                         </>
                     )}
-                    options={users.map(item => ({ label: item, value: item }))}
+                    options={items.map(item => ({ label: item, value: item }))}
                 />
                 <Button type='primary' size='large' onClick={search} loading={isLoadingMutate}>
                     Поиск
@@ -79,7 +80,7 @@ export const Main: FC = () => {
                 </Button>
             </Flex>
 
-            <Table loading={isLoading} style={{ marginTop: 20 }} dataSource={data || []} columns={columns} />
+            <Table loading={isLoading} style={{ marginTop: 20 }} dataSource={data || []} columns={columns} rowKey='id' />
         </>
     )
 }

@@ -22,6 +22,9 @@ export const useUserList = (token: string) => {
         },
         {
             enabled: !!token.length,
+            refetchOnWindowFocus: false,
+            refetchInterval: false,
+            staleTime: Infinity
         },
     )
 }

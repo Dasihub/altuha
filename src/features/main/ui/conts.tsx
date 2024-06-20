@@ -31,7 +31,7 @@ export const getColumn = (): TableColumnsType<IUsersParse> => [
         align: 'center',
     },
     {
-        title: 'Закрытый или открытый',
+        title: 'Статус',
         dataIndex: 'is_private',
         align: 'center',
         key: 'is_private',

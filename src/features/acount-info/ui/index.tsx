@@ -1,11 +1,12 @@
 import { FC, useContext, useMemo, useState } from 'react'
-import { Button, Card, Divider, Flex, Image, Modal, Spin, Table, Tag, Typography } from 'antd'
+import { Button, Divider, Flex, Image, Modal, Spin, Table, Tag, Typography } from 'antd'
 import { getColumn } from './conts.tsx'
 import { useParams } from 'react-router-dom'
 import { IUserPost, IUsersParse, useUserList } from '@/features/main'
 import styles from './styles.module.css'
 import { AuthContext } from '@/app/providers'
 import { useGetReport } from '@/features/acount-info/queries'
+import {GetImg} from './get-img'
 
 export const Account: FC = () => {
     const { id } = useParams<{ id: string }>()
@@ -15,7 +16,7 @@ export const Account: FC = () => {
 
     const columns = getColumn()
 
-    const { data: report, isLoading: isLoadingReport } = useGetReport(token, id)
+    const { data: report, isLoading: isLoadingReport } = useGetReport(token, id, modalAI)
 
     const { data: userParser, isLoading: loadingParser } = useUserList(token)
 
@@ -103,7 +104,8 @@ export const Account: FC = () => {
                             if (item.is_video) {
                                 return <video className={styles.img} src={item.video_url} controls></video>
                             }
-                            return <img alt='img' className={styles.img} src={`https://c1b6-34-27-224-67.ngrok-free${item.url}`} />
+                            return <GetImg id={item.url}/>
+                            // return <img alt='img' className={styles.img} src={`https://1b7b-212-112-118-14.ngrok-free${item.url}`} />
                         })}
                     </div>
                 </Flex>

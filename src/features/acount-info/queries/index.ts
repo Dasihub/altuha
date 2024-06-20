@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query'
 import { api } from '@/shared/api'
 
-export const useGetReport = (token: string, id: string) => {
+export const useGetReport = (token: string, id: string, modalAI: boolean) => {
     return useQuery<string>(
         ['report-ai', id],
         async () => {
@@ -13,7 +13,22 @@ export const useGetReport = (token: string, id: string) => {
             }
         },
         {
-            enabled: !!token.length && !!id.length,
+            enabled: !!token.length && !!id.length && modalAI,
         },
     )
+}
+
+export const useGetImg = ( id: string) => {
+    return useQuery(['img'], async () => {
+        try {
+            const {data} = await api({url: `/media/static/${id}`, method: 'POST', responseType: 'blob'})
+
+            return data
+        } catch (e) {
+            console.log(e)
+        }
+    }, {
+        refetchInterval: false,
+        refetchOnWindowFocus: false
+    })
 }
