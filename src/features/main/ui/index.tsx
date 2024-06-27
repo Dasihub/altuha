@@ -30,7 +30,7 @@ export const Main: FC = () => {
     }
 
     const search = () => {
-        if (values.length) {
+        if (users.length) {
             return mutate({ users })
         }
 
@@ -44,6 +44,7 @@ export const Main: FC = () => {
                     size='large'
                     style={{ minWidth: '400px' }}
                     onChange={setUsers}
+                    value={values}
                     notFoundContent='Пока нет данных'
                     mode='tags'
                     dropdownRender={menu => (

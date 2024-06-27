@@ -19,7 +19,7 @@ export const useGetReport = (token: string, id: string, modalAI: boolean) => {
 }
 
 export const useGetImg = ( id: string) => {
-    return useQuery(['img'], async () => {
+    return useQuery(['img', id], async () => {
         try {
             const {data} = await api({url: `/media/static/${id}`, method: 'POST', responseType: 'blob'})
 
